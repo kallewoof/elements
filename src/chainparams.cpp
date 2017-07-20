@@ -141,9 +141,12 @@ public:
         nPruneAfterHeight = 100000;
 
         parentGenesisBlockHash = uint256S("0x4b6f5d5f7d4fbc3cc1a901175a87141f457657f48e3544425333d854deaec894");
+        printf("parentGenesisBlockHash = %s\n", parentGenesisBlockHash.ToString().c_str());
         CScript scriptDestination(CScript() << std::vector<unsigned char>(parentGenesisBlockHash.begin(), parentGenesisBlockHash.end()) << OP_WITHDRAWPROOFVERIFY);
+        printf("scriptDestination = "); for (int i = 0; i < scriptDestination.size(); i++) printf("%02x", scriptDestination[i]); printf("\n");
         genesis = CreateGenesisBlock(consensus, strNetworkID, scriptDestination, 1231006505, genesisChallengeScript, 1, MAX_MONEY, 100, BITCOINID);
         consensus.hashGenesisBlock = genesis.GetHash();
+        printf("genesis block hash = %s\n", consensus.hashGenesisBlock.ToString().c_str());
 
         scriptCoinbaseDestination = CScript() << ParseHex("0229536c4c83789f59c30b93eb40d4abbd99b8dcc99ba8bd748f29e33c1d279e3c") << OP_CHECKSIG;
         vFixedSeeds.clear(); //! TODO
