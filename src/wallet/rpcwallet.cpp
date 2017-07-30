@@ -3665,7 +3665,7 @@ UniValue makeoffer(const JSONRPCRequest& request)
     // addrHash.push_back(Pair(addrTmp.get_str(), ValueFromAmount(sellAmount))); // sold amount
     // outputAssets.push_back(Pair(addrTmp.get_str(), sellAsset));
     r.params.push_back(addrHash);
-    r.params.push_back((int64_t)0);
+    r.params.push_back(UniValue(0));
     r.params.push_back(outputAssets);
     printf("r = %s\n", r.params.write().c_str());
     UniValue rtx = createrawtransaction(r);
@@ -3919,7 +3919,7 @@ UniValue matchoffer(const JSONRPCRequest& request)
     addrHash.push_back(Pair(addrTmp.get_str(), ValueFromAmount(sellAmount))); // sold amount
     outputAssets.push_back(Pair(addrTmp.get_str(), sellAsset));
     r.params.push_back(addrHash);
-    r.params.push_back((int64_t)0);
+    r.params.push_back(UniValue(0));
     r.params.push_back(outputAssets);
     // printf("r = %s\n", r.params.write().c_str());
     UniValue rtx = createrawtransaction(r);
