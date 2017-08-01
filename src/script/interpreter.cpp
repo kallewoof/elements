@@ -1616,6 +1616,10 @@ tailcall:
                                 if (GetBoolArg("-validatepegin", DEFAULT_VALIDATE_PEGIN) && !checker.IsConfirmedBitcoinBlock(genesishash, merkleBlock.header.GetHash(), flags & SCRIPT_VERIFY_INCREASE_CONFIRMATIONS_REQUIRED))
                                     return set_error(serror, SCRIPT_ERR_WITHDRAW_VERIFY_BLOCKCONFIRMED);
 #endif
+                                // Terminate execution. This is to preserve compatibility with
+                                // tail-call evaluation, since WITHDRAWPROOFVERIFY doesn't at this
+                                // time clear the stack.
+                                return set_success(serror);
                             } catch (std::exception& e) {
                                 // Probably invalid encoding of something which was deserialized
                                 return set_error(serror, SCRIPT_ERR_WITHDRAW_VERIFY_FORMAT);
